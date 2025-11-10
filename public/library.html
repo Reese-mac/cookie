@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>宇宙之書 ✦ Cosmic Library</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&family=Noto+Sans+TC:wght@300;400;700&display=swap" rel="stylesheet" />
+
+    <style>
+      body {
+        font-family: "Noto Sans TC", "Inter", sans-serif;
+        background: radial-gradient(circle at 50% 20%, #112240, #000814 90%);
+        color: #ccd6f6;
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
+      }
+      header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem 5%;
+        background: rgba(10, 25, 47, 0.95);
+        border-bottom: 1px solid rgba(100, 255, 218, 0.3);
+        position: sticky;
+        top: 0;
+      }
+      .logo {
+        font-size: 1.5rem;
+        color: #ffd700;
+        font-weight: 700;
+      }
+      #user-info {
+        color: #64ffda;
+      }
+      .cart-btn {
+        position: relative;
+        background: transparent;
+        border: 1px solid #ffd700;
+        color: #ffd700;
+        padding: 6px 12px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: 600;
+        transition: 0.3s;
+      }
+      .cart-btn:hover {
+        background: rgba(255, 215, 0, 0.1);
+        transform: scale(1.05);
+      }
+      .cart-count {
+        position: absolute;
+        top: -8px;
+        right: -8px;
+        background: #64ffda;
+        color: #000814;
+        border-radius: 50%;
+        font-size: 0.75rem;
+        font-weight: bold;
+        padding: 3px 7px;
+      }
+      main {
+        text-align: center;
+        padding: 4rem 10%;
+      }
+      h1 {
+        color: #64ffda;
+        text-shadow: 0 0 10px #64ffda;
+      }
+      .cosmic-section {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 1.5rem;
+        margin-top: 2rem;
+      }
+      .cosmic-card {
+        background: rgba(13, 33, 58, 0.85);
+        border: 1px solid rgba(100, 255, 218, 0.2);
+        border-radius: 12px;
+        padding: 1.5rem;
+        text-align: left;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+      }
+      .cosmic-card h3 {
+        color: #64ffda;
+      }
+      .add-btn {
+        display: inline-block;
+        margin-top: 1rem;
+        padding: 0.5rem 1.2rem;
+        border: 1px solid #64ffda;
+        color: #64ffda;
+        background: transparent;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: 600;
+        transition: 0.3s;
+      }
+      .add-btn:hover {
+        background-color: rgba(100, 255, 218, 0.1);
+      }
+      .btn-row {
+        margin-top: 2rem;
+      }
+      .btn {
+        padding: 0.7rem 1.8rem;
+        border: 2px solid #64ffda;
+        color: #64ffda;
+        background: transparent;
+        border-radius: 8px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: 0.3s;
+        margin: 0 0.5rem;
+      }
+      .btn:hover {
+        background-color: rgba(100, 255, 218, 0.1);
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <div class="logo">✦ 宇宙之書</div>
+      <div>
+        <button class="cart-btn" onclick="goCart()">🛒 前往購物車 <span id="cart-count" class="cart-count">0</span></button>
+        <span id="user-info">載入中...</span>
+      </div>
+    </header>
+
+    <main>
+      <h1>📖 歡迎進入星語者宇宙</h1>
+      <p>探索靈感商品 ✦ 點選即可加入購物車</p>
+
+     <section class="cosmic-section">
+  <div class="cosmic-card">
+    <img src="https://centralus1-mediap.svc.ms/transform/thumbnail?provider=spo&farmid=193391&inputFormat=png&cs=MDAwMDAwMDAtMDAwMC0wMDAwLTAwMDAtMDAwMDQ4MTcxMGE0fFNQTw&docid=https%3A%2F%2Fmy.microsoftpersonalcontent.com%2F_api%2Fv2.0%2Fdrives%2Fb!4VrUlS7MWEaJ1xM-yYIBVvEjVr13gFRMt80uLQq7cd813T0GELsuTo1Ud9XDonz7%2Fitems%2F01WMUDEINRR35FQTTMVFHLLTNH6KV65Y77%3Ftempauth%3Dv1e.eyJzaXRlaWQiOiI5NWQ0NWFlMS1jYzJlLTQ2NTgtODlkNy0xMzNlYzk4MjAxNTYiLCJhcHBpZCI6IjAwMDAwMDAwLTAwMDAtMDAwMC0wMDAwLTAwMDA0ODE3MTBhNCIsImF1ZCI6IjAwMDAwMDAzLTAwMDAtMGZmMS1jZTAwLTAwMDAwMDAwMDAwMC9teS5taWNyb3NvZnRwZXJzb25hbGNvbnRlbnQuY29tQDkxODgwNDBkLTZjNjctNGM1Yi1iMTEyLTM2YTMwNGI2NmRhZCIsImV4cCI6IjE3NjI3NjUyMDAifQ.eNbvPhLE5xGaLGsIcTFIlUBIMjTHKndab_RsUhN_wVW4HzAJ5edbPuAcvDLS0YYDOsoBomTjXRawXzv4oYp_HT2vJpYl1gz7JRO5X9bOYbd4zJmrKLLqGu6v842UNtddqH4qbNQL_Emy4I0bmG8iAPVKRWhzQy69Dw_rdOp8jqXW_LF9s-5ZO_1jOBhS7HTT72ZmUrvCc20xcNau8Jz1ZNL4bTsvco0t3p8lqnTwYtYBsXOy7v7I2dUbQPJTcUI7e9Zwyd26_JyQrDM7XdVEWql_DkR0m91yucDIjbxF7WFKt7DR9omzzJdkdpQf1dvJTrOuiLgiqogp5JtBu6ZefJQNUbEk_Os0Enuq6kRoaF5Qfo7LARHI-ACYKQfhbp8U.eBmAKB5BR37kOmHmSXd5vi9qaeDKYAEbSZ7BW1PU1TI%26version%3DPublished&cb=63898336598&encodeFailures=1&width=618&height=927&action=Access" alt="太陽系T恤" style="width:100%; height:250px; object-fit:cover; border-radius:8px;" />
+    <h3>🌞 太陽系T恤</h3>
+    <p>柔軟棉質，充滿宇宙能量。</p>
+    <button class="add-btn" onclick="addToCart('太陽系T恤')">加入購物車</button>
+  </div>
+
+  <div class="cosmic-card">
+    <img src="https://centralus1-mediap.svc.ms/transform/thumbnail?provider=spo&farmid=193391&inputFormat=png&cs=MDAwMDAwMDAtMDAwMC0wMDAwLTAwMDAtMDAwMDQ4MTcxMGE0fFNQTw&docid=https%3A%2F%2Fmy.microsoftpersonalcontent.com%2F_api%2Fv2.0%2Fdrives%2Fb!4VrUlS7MWEaJ1xM-yYIBVvEjVr13gFRMt80uLQq7cd813T0GELsuTo1Ud9XDonz7%2Fitems%2F01WMUDEIIPRRXDL2E2IBFIIZMJUNKCLBP6%3Ftempauth%3Dv1e.eyJzaXRlaWQiOiI5NWQ0NWFlMS1jYzJlLTQ2NTgtODlkNy0xMzNlYzk4MjAxNTYiLCJhcHBpZCI6IjAwMDAwMDAwLTAwMDAtMDAwMC0wMDAwLTAwMDA0ODE3MTBhNCIsImF1ZCI6IjAwMDAwMDAzLTAwMDAtMGZmMS1jZTAwLTAwMDAwMDAwMDAwMC9teS5taWNyb3NvZnRwZXJzb25hbGNvbnRlbnQuY29tQDkxODgwNDBkLTZjNjctNGM1Yi1iMTEyLTM2YTMwNGI2NmRhZCIsImV4cCI6IjE3NjI3NjUyMDAifQ.zuX-PG4xKM_9T6-0AJzborApLLuE-9DzBUqoyLIBGHoGExYlyJwxhILVGuXHCBufHHylUq2KMoXjYAmg7NDDRBKcF995Hqfx_bytv42rMRoUXeohf_Oayf0kHCR4CTkIA7gyOT_ecWhc0Q_rIRbfZ2198fUNzIMWCiY8ZO6qV7YelkO1IUI_IP8VIvId9oZnNg-N9-3fpkaOpaSKqBfP3G_z5CPYTgcQtshp1O9Ap67p6cZtsQgDaYumb3eQNT9ca4PYYyaBKcY4RM6zt_t20bD39rFuAMjy_Ds3K6Udsrk2h43ms7ZwbirwShJsHFM0DpTgz_dR207wNCJQrg6ubxtTbLwAdPW2Qh3J2iDltgZTpJHTIGRLysdycTtUGeas.zf1OYHW9jF6hq5DMgx5ocSuopZUEqGo4AfHJnJqW23o%26version%3DPublished&cb=63898342545&encodeFailures=1&width=945&height=927&action=Access" alt="土星環手錶" style="width:100%; height:250px; object-fit:cover; border-radius:8px;" />
+    <h3>🪐 土星環手錶</h3>
+    <p>以土星環造型打造的星際腕錶。</p>
+    <button class="add-btn" onclick="addToCart('土星環手錶')">加入購物車</button>
+  </div>
+
+  <div class="cosmic-card">
+    <img src="https://centralus1-mediap.svc.ms/transform/thumbnail?provider=spo&farmid=193391&inputFormat=png&cs=MDAwMDAwMDAtMDAwMC0wMDAwLTAwMDAtMDAwMDQ4MTcxMGE0fFNQTw&docid=https%3A%2F%2Fmy.microsoftpersonalcontent.com%2F_api%2Fv2.0%2Fdrives%2Fb!4VrUlS7MWEaJ1xM-yYIBVvEjVr13gFRMt80uLQq7cd813T0GELsuTo1Ud9XDonz7%2Fitems%2F01WMUDEIOQJ5JQPGEAVFFKPKBSWM5DEDVJ%3Ftempauth%3Dv1e.eyJzaXRlaWQiOiI5NWQ0NWFlMS1jYzJlLTQ2NTgtODlkNy0xMzNlYzk4MjAxNTYiLCJhcHBpZCI6IjAwMDAwMDAwLTAwMDAtMDAwMC0wMDAwLTAwMDA0ODE3MTBhNCIsImF1ZCI6IjAwMDAwMDAzLTAwMDAtMGZmMS1jZTAwLTAwMDAwMDAwMDAwMC9teS5taWNyb3NvZnRwZXJzb25hbGNvbnRlbnQuY29tQDkxODgwNDBkLTZjNjctNGM1Yi1iMTEyLTM2YTMwNGI2NmRhZCIsImV4cCI6IjE3NjI3NjUyMDAifQ.arLRAxHEtZOwYYyagcxBeFJro2WljsGNaRa0nvp_I7cVwqna2v-XHk721gygVcr38nXpoHd02yTUswEX_Tl1dtSpRFQ2rvh7MMkijUpsYdU7M-l9IIxgFBaE15M7jHdqmc9C8U6W-t_f7UXIZjXSd2n5V94EVXZ0bnnAtWtzuYL2CH_wBUN0_P1azuDdXVc5yuo4YnaXfohOK9BJGbkdF9Cv-KS3Ww16JPlbL-C-6PyNi7LQ7WbzPMcLmbB6scqhiCZWlQo2gR9LrUAL56rU--zfNIKvLW3zYWbEMiQBzvlAUd_CQN5hhykA2qOw-fH_Bq_1QCsJComsdKIM_Wr39_i63I0nJeX5zDtY_lwJP3HRhyPDDFnDKVd4u0vWh3rL.UyRDUGsB5qNmvGAGa4ffy0K6KvA9CRpudr5TtdNn6Tw%26version%3DPublished&cb=63898343127&encodeFailures=1&width=618&height=927" alt="銀河系托特包" style="width:100%; height:250px; object-fit:cover; border-radius:8px;" />
+    <h3>🌌 銀河系托特包</h3>
+    <p>印有銀河星雲的神秘帆布袋。</p>
+    <button class="add-btn" onclick="addToCart('銀河系托特包')">加入購物車</button>
+  </div>
+  </div>
+</section>
+
+
+      <div class="btn-row">
+        <button class="btn" onclick="logout()">登出 ✦</button>
+        <button class="btn" onclick="goHome()">返回首頁</button>
+      </div>
+    </main>
+
+    <script>
+      // === 檢查登入 ===
+      async function checkLogin() {
+        const res = await fetch("/check-login", { credentials: "include" });
+        const data = await res.json();
+        if (data.success) {
+          document.getElementById("user-info").textContent = "🌌 " + data.user.username;
+        } else {
+          alert("登入已過期，請重新登入 ✦");
+          window.location.href = "index.html";
+        }
+      }
+
+      // === 加入購物車 ===
+      function addToCart(productName) {
+        let cart = JSON.parse(localStorage.getItem("cart")) || {};
+        cart[productName] = (cart[productName] || 0) + 1;
+        localStorage.setItem("cart", JSON.stringify(cart));
+        updateCartCount();
+      }
+
+      // === 更新購物車數量 ===
+      function updateCartCount() {
+        const cart = JSON.parse(localStorage.getItem("cart")) || {};
+        const total = Object.values(cart).reduce((a, b) => a + b, 0);
+        document.getElementById("cart-count").textContent = total;
+      }
+
+      // === 前往購物車 ===
+      function goCart() {
+        window.location.href = "cart.html";
+      }
+
+      // === 登出 ===
+      async function logout() {
+        await fetch("/logout", { method: "POST", credentials: "include" });
+        alert("已登出 ✦");
+        window.location.href = "index.html";
+      }
+
+      // === 返回首頁 ===
+      function goHome() {
+        window.location.href = "index.html";
+      }
+
+      checkLogin();
+      updateCartCount();
+    </script>
+  </body>
+</html>
