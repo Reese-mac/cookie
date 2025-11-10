@@ -68,10 +68,11 @@ app.post("/login", (req, res) => {
 
     // 🍪 儲存於 cookie，七天有效
     res.cookie("token", token, {
-      httpOnly: true,
-      maxAge: 7 * 24 * 60 * 60 * 1000,
-      sameSite: "strict",
-    });
+  httpOnly: true,
+  secure: true, // ✅ 這行一定要加上（HTTPS 必須）
+  sameSite: "strict",
+  maxAge: 7 * 24 * 60 * 60 * 1000,
+});
 
     res.json({ success: true, message: "登入成功 ✦", user: { username: row.username } });
   });
