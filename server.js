@@ -1,57 +1,20 @@
-// === 引入模組 ===
 import express from "express";
 import path from "path";
 import { fileURLToPath } from "url";
-import sqlite3 from "sqlite3";
-import bodyParser from "body-parser";
-import jwt from "jsonwebtoken";
-import bcrypt from "bcrypt";
-import cookieParser from "cookie-parser";
 
-// === 初始化 ===
-const app = express();
-const SECRET_KEY = "starwhisperer-secret"; // JWT 金鑰
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+const app = express();
+const PORT = process.env.PORT || 3000;
 
-// === 中介層設定 ===
+// ✅ 讓 public 資料夾內的檔案可被存取
 app.use(express.static(path.join(__dirname, "public")));
-app.use(bodyParser.json());
-app.use(cookieParser());
 
-// === 初始化 SQLite ===
-const db = new sqlite3.Database("users.db");
-db.run(`CREATE TABLE IF NOT EXISTS users (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
-  username TEXT UNIQUE,
-  password TEXT,
-  cart TEXT DEFAULT '[]'
-)`);
-
-// === JWT 驗證中介層 ===
-function verifyToken(req, res, next) {
-  const token = req.cookies.token; // 🍪 從 cookie 讀取 token
-  if (!token) {
-    if (req.path !== "/check-login") {
-      console.log("⚠️ 沒有 Token，請先登入");
-    }
-    return res.status(401).json({ success: false, message: "未登入" });
-  }
-
-  jwt.verify(token, SECRET_KEY, (err, user) => {
-    if (err) {
-      console.log("❌ Token 驗證失敗：", err.message);
-      return res.status(403).json({ success: false, message: "登入已過期" });
-    }
-    req.user = user;
-    next();
-  });
-}
-
-// === 首頁導向 ===
+// ✅ 首頁導向
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "index.html"));
 });
+
 
 // === 登入 ===
 app.post("/login", (req, res) => {
