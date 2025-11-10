@@ -1,25 +1,24 @@
-// === 引入模組 ===
 import express from "express";
 import path from "path";
 import { fileURLToPath } from "url";
-import sqlite3 from "sqlite3";
-import bodyParser from "body-parser";
-import jwt from "jsonwebtoken";
-import bcrypt from "bcrypt";
-import cookieParser from "cookie-parser"; // 🍪 新增
 
-// === 建立伺服器實例 ===
-const app = express();
-const SECRET_KEY = "starwhisperer-secret"; // JWT 金鑰
-
-// === 取得 __dirname ===
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+const app = express();
+const PORT = process.env.PORT || 3000;
 
-// === 中介層 ===
+// 靜態檔案：讓 public 裡的 HTML / CSS / JS 可被存取
 app.use(express.static(path.join(__dirname, "public")));
-app.use(bodyParser.json());
-app.use(cookieParser()); // 🍪 啟用 cookie 解析
+
+// === 首頁導向 index.html 或 portal.html ===
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "index.html"));
+  // 若你想改成 portal.html，這行改成：
+  // res.sendFile(path.join(__dirname, "public", "portal.html"));
+});
+
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
 
 // === 初始化 SQLite ===
 const db = new sqlite3.Database("users.db");
