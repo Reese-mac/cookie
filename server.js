@@ -48,9 +48,9 @@ function verifyToken(req, res, next) {
   });
 }
 
-// === 首頁 ===
+// === 首頁導向 ===
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "portal.html"));
+  res.sendFile(path.join(__dirname, "public", "index.html"));
 });
 
 // === 登入 ===
