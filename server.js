@@ -8,8 +8,8 @@ import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import cookieParser from "cookie-parser"; // 🍪 新增
 
+// === 建立伺服器實例 ===
 const app = express();
-const port = 3000;
 const SECRET_KEY = "starwhisperer-secret"; // JWT 金鑰
 
 // === 取得 __dirname ===
@@ -33,13 +33,12 @@ db.run(`CREATE TABLE IF NOT EXISTS users (
 // === JWT 驗證中介層 ===
 function verifyToken(req, res, next) {
   const token = req.cookies.token; // 🍪 從 cookie 讀取 token
- if (!token) {
-  if (req.path !== "/check-login") {
-    console.log("⚠️ 沒有 Token，請先登入");
+  if (!token) {
+    if (req.path !== "/check-login") {
+      console.log("⚠️ 沒有 Token，請先登入");
+    }
+    return res.status(401).json({ success: false, message: "未登入" });
   }
-  return res.status(401).json({ success: false, message: "未登入" });
-}
-
 
   jwt.verify(token, SECRET_KEY, (err, user) => {
     if (err) {
@@ -159,7 +158,5 @@ app.get("/profile.html", (req, res) => {
   res.sendFile(path.join(__dirname, "public", "portal.html"));
 });
 
-// === 啟動伺服器 ===
-app.listen(port, () => {
-  console.log(`🚀 伺服器已啟動：http://localhost:${port}`);
-});
+// ✅ 匯出 app 給 Vercel 使用
+export default app;
