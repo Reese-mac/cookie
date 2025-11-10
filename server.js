@@ -1,24 +1,23 @@
+// === 引入模組 ===
 import express from "express";
 import path from "path";
 import { fileURLToPath } from "url";
+import sqlite3 from "sqlite3";
+import bodyParser from "body-parser";
+import jwt from "jsonwebtoken";
+import bcrypt from "bcrypt";
+import cookieParser from "cookie-parser";
 
+// === 初始化 ===
+const app = express();
+const SECRET_KEY = "starwhisperer-secret"; // JWT 金鑰
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const app = express();
-const PORT = process.env.PORT || 3000;
 
-// 靜態檔案：讓 public 裡的 HTML / CSS / JS 可被存取
+// === 中介層設定 ===
 app.use(express.static(path.join(__dirname, "public")));
-
-// === 首頁導向 index.html 或 portal.html ===
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "index.html"));
-  // 若你想改成 portal.html，這行改成：
-  // res.sendFile(path.join(__dirname, "public", "portal.html"));
-});
-
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
-
+app.use(bodyParser.json());
+app.use(cookieParser());
 
 // === 初始化 SQLite ===
 const db = new sqlite3.Database("users.db");
@@ -70,7 +69,7 @@ app.post("/login", (req, res) => {
     // 🍪 儲存於 cookie，七天有效
     res.cookie("token", token, {
       httpOnly: true,
-      maxAge: 7 * 24 * 60 * 60 * 1000, // 七天
+      maxAge: 7 * 24 * 60 * 60 * 1000,
       sameSite: "strict",
     });
 
